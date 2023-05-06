@@ -9,6 +9,8 @@ object Dependencies {
         const val lifeCycleExtension = "android.arch.lifecycle:extensions:${Versions.lifeCycle}"
         const val lifeCycleViewModel = "android.arch.lifecycle:viewmodel:${Versions.lifeCycle}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragment_ktx}"
+        const val lifecycle_viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifeCycle_viewmodel_ktx}"
     }
 
     object Coroutine {
@@ -26,6 +28,11 @@ object Dependencies {
         const val converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
     }
 
+    object NavigationComponent {
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_component}"
+        const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation_component}"
+    }
+
     object Test {
         const val junit = "junit:junit:4.13.2"
     }
@@ -38,6 +45,10 @@ object Dependencies {
     object Dagger {
         const val core = "com.google.dagger:dagger:${Versions.dagger_version}"
         const val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger_version}"
+    }
+
+    object Lottie {
+        const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
     }
 
 }

@@ -53,10 +53,14 @@ dependencies {
     implementation(Dependencies.Android.lifeCycleExtension)
     implementation(Dependencies.Android.lifeCycleViewModel)
     implementation(Dependencies.Android.constraintLayout)
-
+    implementation(Dependencies.Android.fragmentKtx)
+    implementation(Dependencies.Android.lifecycle_viewmodel_ktx)
     //coroutine
     implementation(Dependencies.Coroutine.android)
 
+    //navigation
+    implementation(Dependencies.NavigationComponent.navigationFragment)
+    implementation(Dependencies.NavigationComponent.navigationUiKtx)
     //room
     implementation(Dependencies.Room.runtime)
     implementation(Dependencies.Room.room_ktx)
@@ -70,6 +74,9 @@ dependencies {
     implementation(Dependencies.Dagger.core)
     kapt(Dependencies.Dagger.compiler)
 
+    // lottie
+    implementation(Dependencies.Lottie.lottie)
+    
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.AndroidTest.junit)
     androidTestImplementation(Dependencies.AndroidTest.espresso)
