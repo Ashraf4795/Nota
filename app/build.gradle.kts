@@ -2,6 +2,7 @@ plugins {
     id(Config.Plugins.android_application)
     id(Config.Plugins.kotlin_android)
     id(Config.Plugins.kotlin_kapt)
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -76,7 +77,7 @@ dependencies {
 
     // lottie
     implementation(Dependencies.Lottie.lottie)
-    
+
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.AndroidTest.junit)
     androidTestImplementation(Dependencies.AndroidTest.espresso)

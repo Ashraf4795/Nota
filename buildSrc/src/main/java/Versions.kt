@@ -24,7 +24,7 @@ object Versions {
     const val androidJunit4_version = "1.1.3"
     const val dagger_version = "2.41"
     const val constraint_layout = "2.1.4"
-    const val fragment_ktx = "1.7.1"
+    const val fragment_ktx = "1.5.7"
     const val lifeCycle_viewmodel_ktx = "2.6.1"
     const val navigation_component = "2.5.3"
     const val lottie = "3.4.0"

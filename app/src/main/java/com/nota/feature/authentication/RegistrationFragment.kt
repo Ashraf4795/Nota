@@ -1,4 +1,4 @@
-package com.nota.base
+package com.nota.feature.authentication
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.nota.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
-open class BaseFragment : Fragment() {
+class RegistrationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +18,6 @@ open class BaseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_base, container, false)
+        return inflater.inflate(R.layout.fragment_registration, container, false)
     }
 }
