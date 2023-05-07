@@ -13,7 +13,6 @@ android {
         minSdk = Config.minSdkVersion
         targetSdk = Config.targetSdkVersion
         compileSdk = Config.compileSdkVersion
-
         versionCode = Config.versionNumber
         versionName = Config.versionName
 
