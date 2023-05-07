@@ -1,11 +1,13 @@
 package com.nota.data.local
 
-import com.nota.domain.model.NoteEntity
+import com.nota.data.local.room.entity.NoteEntity
 import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSourceContract {
 
-    fun getNotes(): Flow<List<NoteEntity>>
-    suspend fun getNoteBy(noteId: Long): NoteEntity
-
+    fun getAllNotes(): Flow<List<NoteEntity>>
+    suspend fun getNoteById(noteId: Long): NoteEntity
+    suspend fun insertNote(noteEntity: NoteEntity)
+    suspend fun updateNote(newNote: NoteEntity)
+    suspend fun deleteNote(note: NoteEntity)
 }

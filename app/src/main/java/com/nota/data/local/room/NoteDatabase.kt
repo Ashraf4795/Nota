@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.nota.NotaApplication
-import com.nota.domain.model.NoteEntity
+import com.nota.data.local.room.entity.NoteEntity
 
 @Database(entities = [NoteEntity::class], version = 1)
 abstract class NoteDatabase : RoomDatabase() {
