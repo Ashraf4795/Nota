@@ -2,15 +2,20 @@ package com.nota.data.local
 
 import com.nota.data.local.room.NoteDAO
 import com.nota.data.local.room.entity.NoteEntity
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LocalDataSource (private val noteDAO: NoteDAO) : LocalDataSourceContract {
+@Singleton
+class LocalDataSource @Inject constructor (private val noteDAO: NoteDAO) : LocalDataSourceContract {
 
     override fun getAllNotes(): Flow<List<NoteEntity>> {
         return noteDAO.getAllNotes()
     }
 
-    override suspend fun getNoteById(noteId: Long): NoteEntity {
+    override fun getNoteById(noteId: Long): Flow<NoteEntity> {
         return noteDAO.getNoteById(noteId)
     }
 

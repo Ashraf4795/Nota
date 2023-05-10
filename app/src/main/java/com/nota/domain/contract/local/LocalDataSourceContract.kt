@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface LocalDataSourceContract {
 
     fun getAllNotes(): Flow<List<NoteEntity>>
-    suspend fun getNoteById(noteId: Long): NoteEntity
+    fun getNoteById(noteId: Long): Flow<NoteEntity>
     suspend fun insertNote(noteEntity: NoteEntity)
     suspend fun updateNote(newNote: NoteEntity)
     suspend fun deleteNote(note: NoteEntity)

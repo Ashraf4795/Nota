@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="noteEntity"
+            type="com.nota.data.local.room.entity.NoteEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimary"
+        tools:context=".feature.note_editor.NoteEditorFragment">
+
+        <!-- Note editor title field -->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/note_title_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="48dp"
+            android:text="@{noteEntity.noteTitle}"
+            android:textColor="?attr/colorOnPrimary"
+            android:textColorHint="@color/light_gray"
+            android:textSize="48sp"
+            android:fontFamily="@font/tajawal_regular"
+            android:hint="@string/hint_title_field"
+            android:maxLines="4"
+            android:background="@android:color/transparent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:hint="Title" />
+
+
+        <!-- Note editor text field-->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/note_text_id"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{noteEntity.noteText}"
+            android:textColor="?attr/colorOnPrimary"
+            android:textColorHint="@color/light_gray"
+            android:textSize="24sp"
+            android:fontFamily="@font/tajawal_regular"
+            android:hint="@string/hint_note_text"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/note_title_id"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="noteEntity"
+            type="com.nota.data.local.room.entity.NoteEntity" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/note_item_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="@color/soft_yellow"
+        app:cardCornerRadius="@dimen/default_app_radius"
+        app:contentPaddingBottom="16dp"
+        app:contentPaddingLeft="46dp"
+        app:contentPaddingRight="46dp"
+        app:contentPaddingTop="16dp">
+
+        <TextView
+            android:id="@+id/note_text_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:fontFamily="@font/tajawal_regular"
+            android:maxLines="3"
+            android:text="@{noteEntity.noteContent()}"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            tools:text="Book Review : The Design of Everyday Things by Don Norman Book Review : The Design of Everyday Things by Don Norman Book Review : The Design of Everyday Things by Don Norman" />
+    </androidx.cardview.widget.CardView>
+</layout>

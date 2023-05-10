@@ -8,11 +8,15 @@ import androidx.room.PrimaryKey
 data class NoteEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_id")
-    val noteId: Long,
+    val noteId: Long = 0,
     @ColumnInfo(name = "last_modify_timestamp")
-    val lastModifingTimestamp: Long,
+    val lastModifyingTimestamp: Long = System.currentTimeMillis(),
     @ColumnInfo(name = "note_title")
     val noteTitle: String,
     @ColumnInfo(name = "note_text")
     val noteText: String
-)
+) {
+    fun noteContent(): String {
+        return noteTitle.ifBlank { noteText }
+    }
+}

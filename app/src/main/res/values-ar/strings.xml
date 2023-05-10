@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">نوتا</string>
+    <string name="note_title">ملحوظات</string>
+    <string name="search_icon_label">زر بحث بقائمة الملحوظات</string>
+    <string name="add_note_floating_button_label">زر إضافة ملحوظة جديدة</string>
+    <string name="empty_list_hint">أنشئ ملاحظتك الأولى</string>
+    <string name="hint_title_field">عنوان</string>
+    <string name="hint_note_text">أكتب شيئــا ما ...</string>
+</resources>

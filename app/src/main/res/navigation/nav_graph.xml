@@ -7,7 +7,25 @@
 
     <fragment
         android:id="@+id/noteListFragment"
-        android:name="com.nota.feature.NoteList.NoteListFragment"
+        android:name="com.nota.feature.note_list.NoteListFragment"
         android:label="fragment_note_list"
-        tools:layout="@layout/fragment_note_list" />
+        tools:layout="@layout/fragment_note_list" >
+        <action
+            android:id="@+id/action_noteListFragment_to_noteDisplayFragment"
+            app:destination="@id/noteDisplayFragment">
+            <argument
+                android:name="note_id"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+    <fragment
+        android:id="@+id/noteDisplayFragment"
+        android:name="com.nota.feature.note_editor.NoteEditorFragment"
+        android:label="fragment_note_display"
+        tools:layout="@layout/fragment_note_editor" >
+        <argument
+            android:name="note_id"
+            app:argType="long"/>
+    </fragment>
 </navigation>

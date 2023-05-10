@@ -18,6 +18,13 @@ object Config {
         const val kotlin_android = "kotlin-android"
         const val google_gms_service = "com.google.gms.google-services"
         const val kotlin_kapt = "kotlin-kapt"
+        const val safe_arg_plugin = "androidx.navigation.safeargs"
+    }
+
+    object ClassPath {
+        const val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.androidGradlePluginVersion}"
+        const val kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinPluginVersion}"
+        const val safe_arg_classpath = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgsVersion}"
     }
 }
 

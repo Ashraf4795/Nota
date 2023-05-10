@@ -1,4 +1,4 @@
-package com.nota.feature.NoteList
+package com.nota.feature.note_list
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
@@ -15,20 +15,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NoteListViewModel(
+class NoteListViewModel @Inject constructor (
     private val noteRepository: NotaRepositoryContract,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : BaseViewModel() {
 
     private val _noteListState: MutableStateFlow<State> = MutableStateFlow(Loading)
     val noteListState: StateFlow<State> = _noteListState
-
+    private val allNotesFlow = noteRepository.getAllNotes()
 
     fun getAllNotes() {
         viewModelScope.launch(dispatcher) {
             try {
-                noteRepository.getAllNotes().collect { notes ->
+                allNotesFlow.collect { notes ->
                     if (notes.isNotEmpty()) {
                         _noteListState.emit(Success(notes))
                     } else {

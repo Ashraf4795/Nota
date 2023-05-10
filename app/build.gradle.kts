@@ -3,8 +3,10 @@ plugins {
     id(Config.Plugins.kotlin_android)
     id(Config.Plugins.kotlin_kapt)
     id("org.jetbrains.kotlin.android")
+    id(Config.Plugins.safe_arg_plugin)
 }
 
+@Suppress("UnStableApiUsage")
 android {
     namespace = Config.namespace
 
@@ -43,6 +45,12 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    buildFeatures {
+        dataBinding =true
+    }
+
+
 }
 
 dependencies {

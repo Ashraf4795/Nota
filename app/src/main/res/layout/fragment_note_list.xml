@@ -1,14 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".feature.NoteList.NoteListFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="noteListUiState"
+            type="com.nota.feature.note_list.ui_model.NoteListUiState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="?attr/colorPrimary"
+        tools:context=".feature.note_list.NoteListFragment">
 
-</FrameLayout>
+        <!-- circular loader -->
+        <ProgressBar
+            android:id="@+id/progress_bar_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--Screen title-->
+        <TextView
+            android:id="@+id/note_list_title_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/app_name"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="36sp"
+            android:fontFamily="@font/tajawal_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Search Icon -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/search_button_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/rounded_shape"
+            android:backgroundTint="?attr/colorSecondary"
+            android:contentDescription="@string/search_icon_label"
+            app:srcCompat="@drawable/search_icon"
+            app:fabSize="normal"
+            app:tint="?attr/colorOnSecondary"
+            app:rippleColor="?attr/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@+id/note_list_title_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/note_list_title_id" />
+
+        <!-- note list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/note_list_rv_id"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="@{noteListUiState.shouldShowNoteList()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/note_list_title_id"
+            tools:listitem="@layout/note_item"/>
+
+        <!-- empty list placeholder-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/empty_note_list_placeholder_id"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{noteListUiState.shouldShowPlaceHolder()}"
+            app:layout_constraintBottom_toTopOf="@id/note_list_hint_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty_list_placeholder"
+            app:lottie_renderMode="automatic" />
+
+        <!-- empty note list hint -->
+        <TextView
+            android:id="@+id/note_list_hint_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/empty_list_hint"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="24sp"
+            android:visibility="@{noteListUiState.shouldShowPlaceHolder()}"
+            app:layout_constraintBottom_toTopOf="@id/add_note_button_id"
+            app:layout_constraintEnd_toEndOf="@id/empty_note_list_placeholder_id"
+            app:layout_constraintStart_toStartOf="@id/empty_note_list_placeholder_id"
+            tools:text="@string/empty_list_hint"
+            tools:visibility="visible" />
+
+        <!-- add note floating button-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_note_button_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/colorSecondary"
+            android:contentDescription="@string/add_note_floating_button_label"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            app:rippleColor="?attr/colorAccent"
+            app:fabSize="normal"
+            app:tint="?attr/colorOnSecondary"
+            app:srcCompat="@drawable/add_icon"
+            app:maxImageSize="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
