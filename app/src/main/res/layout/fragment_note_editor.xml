@@ -7,6 +7,9 @@
         <variable
             name="noteEntity"
             type="com.nota.data.local.room.entity.NoteEntity" />
+        <variable
+            name="extendableButtonState"
+            type="com.nota.feature.note_editor.model.ExtendableButtonState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,5 +64,15 @@
             app:layout_constraintTop_toBottomOf="@id/note_title_id"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <include
+            android:id="@+id/color_buttons"
+            layout="@layout/color_selecting_buttons"
+            bind:extendableButtonState= "@{extendableButtonState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

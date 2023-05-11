@@ -26,7 +26,6 @@ class NoteEditorViewModel @Inject constructor(
     private val _noteEntityState: MutableStateFlow<DisplayNoteUiState> =
         MutableStateFlow(AddNewNoteState)
     val noteEntityState: MutableStateFlow<DisplayNoteUiState> = _noteEntityState
-    private val note: Boolean = false
 
     fun checkNavArgs(noteDisplayArgs: NoteEditorFragmentArgs) {
         viewModelScope.launch(dispatcher) {

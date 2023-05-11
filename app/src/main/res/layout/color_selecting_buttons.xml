@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="extendableButtonState"
+            type="com.nota.feature.note_editor.model.ExtendableButtonState" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!-- add note floating button-->
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/select_note_color_button_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/colorSecondary"
+            android:contentDescription="@string/select_background_color_for_note_label"
+            app:icon="@drawable/color_pallete_icon"
+            app:iconPadding="0dp"
+            app:iconTint="?attr/colorOnSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rippleColor="?attr/colorAccent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/color_one_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/color_1"
+            app:fabSize="mini"
+            android:visibility="@{extendableButtonState.shouldShow()}"
+            app:layout_constraintBottom_toTopOf="@id/select_note_color_button_id"
+            app:layout_constraintEnd_toEndOf="@id/select_note_color_button_id"
+            app:layout_constraintStart_toStartOf="@id/select_note_color_button_id" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/color_two_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/color_2"
+            app:fabSize="mini"
+            android:visibility="@{extendableButtonState.shouldShow()}"
+            app:layout_constraintBottom_toTopOf="@id/color_one_id"
+            app:layout_constraintEnd_toEndOf="@id/color_one_id"
+            app:layout_constraintStart_toStartOf="@id/color_one_id" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -8,4 +8,9 @@
     <color name="soft_yellow">#FFF599</color>
     <color name="medium_gray">#5E5D5D</color>
 
+    <color name="color_1">#FD99FF</color>
+    <color name="color_2">#FF9E9E</color>
+    <color name="color_3">#91F48F</color>
+    <color name="color_4">@color/soft_yellow</color>
+    <color name="color_5">#9EFFFF</color>
 </resources>
