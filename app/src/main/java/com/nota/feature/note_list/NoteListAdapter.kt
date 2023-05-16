@@ -10,7 +10,8 @@ import com.nota.utils.addIfUnique
 
 class NoteListAdapter(
     private val noteList: List<NoteEntity>,
-    private val onNoteItemClick: OnNoteItemClick
+    private val onNoteItemClick: OnNoteItemClick,
+    private val onItemSwipeEvent: OnItemSwipeEvent<NoteEntity>
 ) : RecyclerView.Adapter<NoteListAdapter.NoteItemViewHolder>() {
 
     private val mutableNoteList = noteList.toMutableList()
@@ -34,6 +35,20 @@ class NoteListAdapter(
         notifyDataSetChanged()
     }
 
+    fun removeItemAt(itemPosition: Int) {
+        val removedItem = mutableNoteList[itemPosition]
+        notifyItemRemoved(itemPosition)
+        onItemSwipeEvent.onItemRemoved(removedItem)
+    }
+
+    fun restoreLastDeletedItem(note: NoteEntity, position: Int) {
+        onItemSwipeEvent.onUnDoItemRemove(note)
+    }
+
+    fun getData(): List<NoteEntity> {
+        return mutableNoteList.toList()
+    }
+
     inner class NoteItemViewHolder(private val binding: NoteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(note: NoteEntity) {
@@ -47,4 +62,9 @@ class NoteListAdapter(
 
 interface OnNoteItemClick {
     fun onClick(note: NoteEntity)
+}
+
+interface  OnItemSwipeEvent <T> {
+    fun onItemRemoved(item: T)
+    fun onUnDoItemRemove(item: T)
 }

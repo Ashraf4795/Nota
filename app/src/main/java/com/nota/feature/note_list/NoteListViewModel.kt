@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.nota.TAG
 import com.nota.base.BaseViewModel
+import com.nota.data.local.room.entity.NoteEntity
 import com.nota.domain.contract.repository.NotaRepositoryContract
 import com.nota.domain.state.Empty
 import com.nota.domain.state.Error
@@ -40,6 +41,18 @@ class NoteListViewModel @Inject constructor (
                 _noteListState.emit(Error(ex))
                 Log.e(TAG, ex.message ?: "getAllNotes error")
             }
+        }
+    }
+
+    fun removeNoteAt(note: NoteEntity) {
+        viewModelScope.launch {
+            noteRepository.deleteNote(note)
+        }
+    }
+
+    fun restoreNote(note: NoteEntity) {
+        viewModelScope.launch {
+            noteRepository.insertNote(note)
         }
     }
 

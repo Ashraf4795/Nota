@@ -6,6 +6,8 @@
     <string name="add_note_floating_button_label">زر إضافة ملحوظة جديدة</string>
     <string name="empty_list_hint">أنشئ ملاحظتك الأولى</string>
     <string name="hint_title_field">عنوان</string>
-    <string name="hint_note_text">أكتب شيئــا ما ...</string>
+    <string name="hint_note_text">أكتب شيئــا ما …</string>
     <string name="select_background_color_for_note_label">زر لإختيار لون خلفية الملحوظة</string>
+    <string name="item_swipe_deleted">تم مسح عنصر</string>
+    <string name="swipe_item_undo_label">تراجع</string>
 </resources>
