@@ -1,6 +1,7 @@
 package com.nota.feature.di
 
 import androidx.lifecycle.ViewModel
+import com.nota.feature.common.SharedViewModel
 import com.nota.feature.note_editor.NoteEditorViewModel
 import com.nota.feature.note_list.NoteListViewModel
 import dagger.Binds
@@ -19,4 +20,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(NoteEditorViewModel::class)
     fun bindsNoteDisplayViewModel(noteDisplayViewModel: NoteEditorViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SharedViewModel::class)
+    fun bindsMainViewModel(sharedViewModel: SharedViewModel): ViewModel
 }

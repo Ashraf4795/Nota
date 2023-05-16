@@ -4,18 +4,16 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.nota.TAG
 import com.nota.base.BaseViewModel
-import com.nota.base.di.ApplicationScope
 import com.nota.base.di.IoDispatcher
-import com.nota.data.local.room.ADD_NEW_NOTE
 import com.nota.data.local.room.entity.NoteEntity
 import com.nota.domain.contract.repository.NotaRepositoryContract
-import com.nota.domain.state.Error
+import com.nota.feature.common.Mode
+import com.nota.feature.common.NoteAddingMode
+import com.nota.feature.common.NoteEditingMode
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,25 +25,26 @@ class NoteEditorViewModel @Inject constructor(
         MutableStateFlow(AddNewNoteState)
     val noteEntityState: MutableStateFlow<DisplayNoteUiState> = _noteEntityState
 
-    fun checkNavArgs(noteDisplayArgs: NoteEditorFragmentArgs) {
+    fun checkNoteEditingMode(mode: Mode) {
         viewModelScope.launch(dispatcher) {
-            val noteId = noteDisplayArgs.noteId
-            val isNoteEditAction = noteId != ADD_NEW_NOTE
-
-            if (isNoteEditAction) {
-                try {
-                    notaRepository.getNoteById(noteId)
-                        .catch {
-                            Log.e(TAG, it.message.toString())
-                        }
-                        .collect { noteEntity ->
-                            _noteEntityState.emit(EditNoteState(noteEntity))
-                        }
-                } catch (ex: Exception) {
-                    Log.e(TAG, ex.message.toString())
+            when (mode) {
+                is NoteEditingMode -> {
+                    try {
+                        notaRepository.getNoteById(mode.noteId)
+                            .catch {
+                                Log.e(TAG, it.message.toString())
+                            }
+                            .collect { noteEntity ->
+                                _noteEntityState.emit(EditNoteState(noteEntity))
+                            }
+                    } catch (ex: Exception) {
+                        Log.e(TAG, ex.message.toString())
+                    }
                 }
-            } else {
-                _noteEntityState.emit(AddNewNoteState)
+
+                is NoteAddingMode -> {
+                    _noteEntityState.emit(AddNewNoteState)
+                }
             }
         }
     }
@@ -55,14 +54,12 @@ class NoteEditorViewModel @Inject constructor(
             if (noteText.isNotBlank() || noteTitle.isNotBlank()) {
                 val note = NoteEntity(noteTitle = noteTitle, noteText = noteText)
                 notaRepository.insertNote(note)
-                Log.d(TAG, "insert $note")
             }
         }
     }
 
     override fun onCleared() {
         super.onCleared()
-        Log.d(TAG, "${this::class.java.name} is cleared")
     }
 
     fun updateNote(scope: CoroutineScope, passedNoteEntity: NoteEntity) {

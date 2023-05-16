@@ -1,31 +1,26 @@
 package com.nota.feature.note_editor
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import androidx.room.util.copy
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nota.NotaApplication
-import com.nota.R
 import com.nota.TAG
 import com.nota.base.BaseFragment
 import com.nota.base.di.ApplicationScope
 import com.nota.data.local.room.entity.NoteEntity
 import com.nota.databinding.FragmentNoteEditorBinding
+import com.nota.feature.common.Mode
+import com.nota.feature.common.SharedViewModel
 import com.nota.feature.note_editor.model.ExtendableButtonState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -34,8 +29,10 @@ import javax.inject.Inject
 class NoteEditorFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val noteDisplayViewModel: NoteEditorViewModel by viewModels { viewModelFactory }
-    private val args: NoteEditorFragmentArgs by navArgs()
+    private val noteEditorViewModel: NoteEditorViewModel by viewModels { viewModelFactory }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val noteEditingMode: Mode by lazy { sharedViewModel.mode }
+
     private lateinit var binding: FragmentNoteEditorBinding
     private lateinit var passedNoteEntity: NoteEntity
     private var isEditMode: Boolean = false
@@ -65,12 +62,11 @@ class NoteEditorFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        noteDisplayViewModel.checkNavArgs(args)
+        noteEditorViewModel.checkNoteEditingMode(noteEditingMode)
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                noteDisplayViewModel.noteEntityState.collect {
+                noteEditorViewModel.noteEntityState.collect {
                     when (it) {
                         AddNewNoteState -> addNewNoteState()
                         is EditNoteState -> editNoteState(it.noteEntity)
@@ -105,14 +101,15 @@ class NoteEditorFragment : BaseFragment() {
 
 
     override fun onPause() {
-        val title = if (binding.noteTitleId.text == null) "No Title" else binding.noteTitleId.text.toString()
+        val title =
+            if (binding.noteTitleId.text == null) "No Title" else binding.noteTitleId.text.toString()
         val text = if (binding.noteTextId.text == null) "" else binding.noteTextId.text.toString()
 
         if (isEditMode) {
             passedNoteEntity = passedNoteEntity.copy(noteText = text, noteTitle = title)
-            noteDisplayViewModel.updateNote(applicationScope, passedNoteEntity)
+            noteEditorViewModel.updateNote(applicationScope, passedNoteEntity)
         } else {
-            noteDisplayViewModel.save(applicationScope, title, text)
+            noteEditorViewModel.save(applicationScope, title, text)
         }
         super.onPause()
     }

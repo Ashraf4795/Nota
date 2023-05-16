@@ -56,4 +56,9 @@ class NoteListViewModel @Inject constructor (
         }
     }
 
+
+    override fun onCleared() {
+        super.onCleared()
+    }
+
 }

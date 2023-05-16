@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -16,15 +17,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nota.NotaApplication
+import com.nota.R
 import com.nota.TAG
 import com.nota.base.BaseFragment
-import com.nota.data.local.room.ADD_NEW_NOTE
 import com.nota.data.local.room.entity.NoteEntity
 import com.nota.databinding.FragmentNoteListBinding
 import com.nota.domain.state.Empty
 import com.nota.domain.state.Error
 import com.nota.domain.state.Loading
 import com.nota.domain.state.Success
+import com.nota.feature.common.NoteAddingMode
+import com.nota.feature.common.NoteEditingMode
+import com.nota.feature.common.SharedViewModel
 import com.nota.feature.note_list.ui_model.NoteListUiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,6 +47,7 @@ class NoteListFragment : BaseFragment(), OnNoteItemClick, OnItemSwipeEvent<NoteE
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val noteListViewModel: NoteListViewModel by viewModels { viewModelFactory }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,11 +80,8 @@ class NoteListFragment : BaseFragment(), OnNoteItemClick, OnItemSwipeEvent<NoteE
 
     private fun setListeners() {
         binding.addNoteButtonId.setOnClickListener {
-            navController.navigate(
-                NoteListFragmentDirections.actionNoteListFragmentToNoteDisplayFragment(
-                    ADD_NEW_NOTE
-                )
-            )
+            sharedViewModel.noteEditingMode(NoteAddingMode)
+            navController.navigate(R.id.action_noteListFragment_to_noteDisplayFragment)
         }
     }
 
@@ -132,11 +134,8 @@ class NoteListFragment : BaseFragment(), OnNoteItemClick, OnItemSwipeEvent<NoteE
     }
 
     override fun onClick(note: NoteEntity) {
-        navController.navigate(
-            NoteListFragmentDirections.actionNoteListFragmentToNoteDisplayFragment(
-                note.noteId
-            )
-        )
+        sharedViewModel.noteEditingMode(NoteEditingMode(note.noteId))
+        navController.navigate(R.id.action_noteListFragment_to_noteDisplayFragment)
     }
 
     override fun onItemRemoved(note: NoteEntity) {

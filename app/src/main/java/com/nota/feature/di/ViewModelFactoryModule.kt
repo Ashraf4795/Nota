@@ -10,5 +10,6 @@ import javax.inject.Singleton
 abstract class ViewModelFactoryModule {
 
     @Binds
+    @Singleton
     abstract fun bindsViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 }

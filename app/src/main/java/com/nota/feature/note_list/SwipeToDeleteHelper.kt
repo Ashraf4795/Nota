@@ -16,8 +16,8 @@ import com.nota.data.local.room.entity.NoteEntity
 
 
 class SwipeToDeleteHelper(
-    private val context: Context,
-    private val parent: View,
+    context: Context,
+    parent: View,
     private val adapter: NoteListAdapter
 ) : ItemTouchHelper.Callback() {
 

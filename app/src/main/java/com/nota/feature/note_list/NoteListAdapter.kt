@@ -2,11 +2,9 @@ package com.nota.feature.note_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import androidx.recyclerview.widget.RecyclerView
 import com.nota.data.local.room.entity.NoteEntity
 import com.nota.databinding.NoteItemBinding
-import com.nota.utils.addIfUnique
 
 class NoteListAdapter(
     private val noteList: List<NoteEntity>,

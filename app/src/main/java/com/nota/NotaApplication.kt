@@ -9,13 +9,9 @@ import kotlinx.coroutines.SupervisorJob
 const val TAG = "NotaApplication"
 
 class NotaApplication : Application() {
-    val applicationScope: CoroutineScope
+    val applicationScope: CoroutineScope = CoroutineScope(SupervisorJob())
     lateinit var applicationComponent: ApplicationComponent
 
-
-    init {
-        applicationScope = CoroutineScope(SupervisorJob())
-    }
 
     override fun onCreate() {
         super.onCreate()
